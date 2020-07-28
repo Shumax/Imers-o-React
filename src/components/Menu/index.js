@@ -12,7 +12,7 @@ export default function Menu() {
 			  <img className="Logo" src={Logo} alt="Logo Devsflix" />
 			</a>
 
-			<Button className="ButtonLink" href="/" >
+			<Button as="a" className="ButtonLink" href="/" >
 				Novo Vídeo
 			</Button>
 		</nav>
