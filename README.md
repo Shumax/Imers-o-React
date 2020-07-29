@@ -12,7 +12,7 @@
  - Deploy Vercel
  
 ### **Aula 02** - Single Page Aplications
-	- React Router DOM
+ 	- React Router DOM
 
 ### **Aula 03**
 	- Formulários reutilizáveis
