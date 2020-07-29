@@ -13,7 +13,7 @@ export default function Menu() {
 			  <img className="Logo" src={Logo} alt="Logo Devsflix" />
 			</Link>
 
-			<Button as={Link} className="ButtonLink" to="/cadastro/video" >
+			<Button as={Link} className="ButtonLink" to="/registration/video" >
 				Novo Vídeo
 			</Button>
 		</nav>

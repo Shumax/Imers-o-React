@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import PageDefault from '../../../components/PageDefault';
 
-export default function CadastroCategoria() {
+export default function RegistrationCategory() {
 	return (
 		<div>
 			<PageDefault>
