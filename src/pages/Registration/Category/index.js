@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
 import PageDefault from '../../../components/PageDefault';
+import FormField from '../../../components/FormField';
 
 export default function RegistrationCategory() {
 	const initValuesCategory = {
@@ -25,7 +26,6 @@ export default function RegistrationCategory() {
 			event.target.getAttribute('name'),
 			event.target.value
 		);
-		
 	}
 	
 
@@ -35,23 +35,22 @@ export default function RegistrationCategory() {
 
 				<h1>Cadastro de Categoria: { valuesCategory.name }</h1>
 
-				<form onSubmit={function handleSubmit(infoEvents) {
-					infoEvents.preventDefault();
+				<form onSubmit={function handleSubmit(event) {
+					event.preventDefault();
 					setCategorys([
 						...categorys,
 						valuesCategory
 					]);
 					setvaluesCategory(initValuesCategory);
 				}}>
-					<label>
-						Título da Categoria:
-						<input 
-							type="text" 
-							value={valuesCategory.name}
-							name="name"
-							onChange={handleChange}
-						/>
-					</label>
+					<FormField
+						label="Nome da Categoria"
+						type="text"
+						name="name"
+						value={valuesCategory.name}
+						onChange={handleChange}
+					/>
+
 					<label>
 						Descrição:
 						<input 

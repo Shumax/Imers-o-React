@@ -11,7 +11,8 @@
  - Styled Components
  - Deploy Vercel
  
-### **Aula 02** - Single Page Aplications
+### **Aula 02**  
+	- Single Page Aplications
  	- React Router DOM
 
 ### **Aula 03**
@@ -19,5 +20,7 @@
 	- UseState
 
 ### **Aula 04**
+	- Validação de Formulários com Ajax
+	- Json-server
  
 ### **Aula 05**
