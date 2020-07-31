@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
+import fetchAPI from '../../../services';
 
 import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
@@ -28,6 +29,18 @@ export default function RegistrationCategory() {
 		);
 	}
 	
+	useEffect(() => {
+		const baseURL = 'http://localhost:3333/categorys';
+
+		let busca =fetch(baseURL)
+			.then(async (response) => {
+				const responseFetched = await response.json();
+				setCategorys([
+					...responseFetched,
+				]);
+		});
+		console.log(busca)
+	},[]);
 
 	return (
 		<div>
@@ -51,9 +64,26 @@ export default function RegistrationCategory() {
 						onChange={handleChange}
 					/>
 
+					<FormField
+						label="Descrição"
+						type="textarea"
+						name="description"
+						value={valuesCategory.description}
+						onChange={handleChange}
+					/>
+
+					<FormField
+						label="Cor"
+						type="color"
+						name="color"
+						value={valuesCategory.color}
+						onChange={handleChange}
+					/>
+					
+					{/*
 					<label>
 						Descrição:
-						<input 
+						<textarea 
 							type="text" 
 							value={valuesCategory.description}
 							name="description"
@@ -69,7 +99,7 @@ export default function RegistrationCategory() {
 							onChange={handleChange}
 						/>
 					</label>
-					
+						*/}
 					<button>
 						Cadastrar
 					</button>

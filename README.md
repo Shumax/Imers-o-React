@@ -22,5 +22,6 @@
 ### **Aula 04**
 	- Validação de Formulários com Ajax
 	- Json-server
+	- eslint
  
 ### **Aula 05**
