@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
-import fetchAPI from '../../../services';
 
 import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
 
 export default function RegistrationCategory() {
 	const initValuesCategory = {
-		name: '',
+		titulo: '',
 		description: '',
 		color: ''
 	}
@@ -30,23 +29,23 @@ export default function RegistrationCategory() {
 	}
 	
 	useEffect(() => {
-		const baseURL = 'http://localhost:3333/categorys';
+		const baseURL = 'http://localhost:8080/categorys';
 
-		let busca =fetch(baseURL)
+		fetch(baseURL)
 			.then(async (response) => {
 				const responseFetched = await response.json();
 				setCategorys([
 					...responseFetched,
 				]);
 		});
-		console.log(busca)
+		
 	},[]);
 
 	return (
 		<div>
 			<PageDefault>
 
-				<h1>Cadastro de Categoria: { valuesCategory.name }</h1>
+				<h1>Cadastro de Categoria: { valuesCategory.titulo }</h1>
 
 				<form onSubmit={function handleSubmit(event) {
 					event.preventDefault();
@@ -59,8 +58,8 @@ export default function RegistrationCategory() {
 					<FormField
 						label="Nome da Categoria"
 						type="text"
-						name="name"
-						value={valuesCategory.name}
+						name="titulo"
+						value={valuesCategory.titulo}
 						onChange={handleChange}
 					/>
 
@@ -110,7 +109,7 @@ export default function RegistrationCategory() {
 					{categorys.map((category, index) => {
 						return (
 							<li key={`${category}${index}`}>
-								{category.name}
+								{category.titulo}
 							</li>
 						);
 					})}
