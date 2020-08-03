@@ -25,3 +25,5 @@
 	- eslint
  
 ### **Aula 05**
+	- Funcionalidade de Cadastro de Vídeos
+	- Atualização dinâmica da Home
