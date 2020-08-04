@@ -23,6 +23,7 @@
 	- Validação de Formulários com Ajax
 	- Json-server
 	- eslint
+	- Deploy do Back-End no Heroku
  
 ### **Aula 05**
 	- Funcionalidade de Cadastro de Vídeos

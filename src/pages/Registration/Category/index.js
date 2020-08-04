@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
+import Loading from '../../../components/Loading';
 
 export default function RegistrationCategory() {
 	const initValuesCategory = {
@@ -29,9 +30,11 @@ export default function RegistrationCategory() {
 	}
 	
 	useEffect(() => {
-		const baseURL = 'http://localhost:8080/categorys';
+		const BASE_URL = window.location.hostname.includes('localhost')
+			? 'http://localhost:8080/categorys'
+			: 'https://devsflix-by-shumax.herokuapp.com/categorys';
 
-		fetch(baseURL)
+		fetch(BASE_URL)
 			.then(async (response) => {
 				const responseFetched = await response.json();
 				setCategorys([
@@ -44,7 +47,6 @@ export default function RegistrationCategory() {
 	return (
 		<div>
 			<PageDefault>
-
 				<h1>Cadastro de Categoria: { valuesCategory.titulo }</h1>
 
 				<form onSubmit={function handleSubmit(event) {
@@ -105,24 +107,24 @@ export default function RegistrationCategory() {
 					
 				</form>
 
-				<ul>
-					{categorys.map((category, index) => {
-						return (
-							<li key={`${category}${index}`}>
-								{category.titulo}
-							</li>
-						);
-					})}
-				</ul>
+				{
+					!categorys.length 
+						? <Loading/> 
+						: <ul>
+								{categorys.map((category, index) => {
+									return (
+										<li key={`${category}${index}`}>
+											{category.titulo}
+										</li>
+									);
+								})}
+							</ul>
+				}
 
-				
-			  
 				<Link to="/">
 					Voltar para Home
 				</Link>
-
 			</PageDefault>
-			
 		</div>
 	);
 }
