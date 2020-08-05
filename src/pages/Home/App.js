@@ -1,14 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import BannerMain from '../../components/BannerMain';
 import Menu from '../../components/Menu';
 import Carousel from '../../components/Carousel';
 import Footer from '../../components/Footer';
 import dadosIniciais from '../../data/dados_iniciais.json';
+import categorysRepositories from '../../repositories';
 
 import './App.css';
 
 function App() {
+	const [dataInit, setDataInit] = useState([]);
+
+	useEffect(()=> {
+		categorysRepositories.getAllWithVideos()
+			.then((categorysWithVideos)=>{
+				console.log(categorysWithVideos);
+			})
+			.catch((error)=>{
+				console.error(error);
+			})
+	});
+
   return (
     <div className="App">
       <Menu/>

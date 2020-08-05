@@ -4,30 +4,20 @@ import { Link } from "react-router-dom";
 import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
 import Loading from '../../../components/Loading';
+import useForm from '../../../customHooks';
 
-export default function RegistrationCategory() {
+function RegistrationCategory() {
+
 	const initValuesCategory = {
 		titulo: '',
 		description: '',
 		color: ''
 	}
 	
-	const [valuesCategory, setvaluesCategory] = useState(initValuesCategory);
+	const {handleChange, valuesCategory, clearForm} = useForm(initValuesCategory);
 	const [categorys, setCategorys] = useState([]);
 
-	function setValue(index, value){
-		setvaluesCategory({
-			...valuesCategory,
-			[index]: value
-		})
-	}
 
-	function handleChange(event){
-		setValue(
-			event.target.getAttribute('name'),
-			event.target.value
-		);
-	}
 	
 	useEffect(() => {
 		const BASE_URL = window.location.hostname.includes('localhost')
@@ -55,7 +45,7 @@ export default function RegistrationCategory() {
 						...categorys,
 						valuesCategory
 					]);
-					setvaluesCategory(initValuesCategory);
+					clearForm(initValuesCategory);
 				}}>
 					<FormField
 						label="Nome da Categoria"
@@ -128,3 +118,5 @@ export default function RegistrationCategory() {
 		</div>
 	);
 }
+
+export default RegistrationCategory;

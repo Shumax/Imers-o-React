@@ -1,10 +1,9 @@
 import React from 'react';
 
-export default function fetchAPI() {
-/*	const baseURL = 'http://localhost:3333/categorys';
+const BASE_URL = window.location.hostname.includes('localhost')
+? 'http://localhost:8080'
+: 'https://devsflix-by-shumax.herokuapp.com';
 
-	fetch(baseURL)
-		.then(async (response) => {
-			const response = await response.json();
-		});*/
-}
+export default {
+	BASE_URL
+};
