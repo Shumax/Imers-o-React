@@ -1,4 +1,3 @@
-import React from 'react';
 
 const BASE_URL = window.location.hostname.includes('localhost')
 ? 'http://localhost:8080'

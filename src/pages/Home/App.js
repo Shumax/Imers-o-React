@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
 import BannerMain from '../../components/BannerMain';
-import Menu from '../../components/Menu';
 import Carousel from '../../components/Carousel';
-import Footer from '../../components/Footer';
-import dadosIniciais from '../../data/dados_iniciais.json';
+import PageDedfault from '../../components/PageDefault';
+import Loading from '../../components/Loading';
+//import dadosIniciais from '../../data/dados_iniciais.json';
 import categorysRepositories from '../../repositories';
 
 import './App.css';
@@ -15,47 +15,81 @@ function App() {
 	useEffect(()=> {
 		categorysRepositories.getAllWithVideos()
 			.then((categorysWithVideos)=>{
-				console.log(categorysWithVideos);
+				setDataInit(categorysWithVideos);
+				console.log(categorysWithVideos)
 			})
 			.catch((error)=>{
 				console.error(error);
 			})
-	});
+	},[]);
 
   return (
     <div className="App">
-      <Menu/>
+			<PageDedfault>
+				{
+					!dataInit.length ? (
+						<Loading/>
+					):(
+						<>
+						{dataInit.map((category, index) => {
+							if (index === 0) {
+								return (
+									<div key={category.id}>
+										<BannerMain
+											videoTitle={dataInit[0].videos[0].titulo}
+											url={dataInit[0].videos[0].url}
+											videoDescription={"O que é Front-end? Trabalhando na área os termos HTML, CSS e JavaScript fazem parte da rotina das desenvolvedoras e desenvolvedores. Mas o que eles fazem, afinal? Descubra com a Vanessa!"}
+										/>
+										<Carousel
+											ignoreFirstVideo
+											category={dataInit[0]}
+										/>
+									</div>
+								);		
+							}
+							return (
+								<Carousel 
+									key={category.id}
+									category={category}
+								/>
+							);
+						})}
+						</>
+					)
+				}
+			</PageDedfault>
+      {/*<Menu/>
 			<BannerMain
-        videoTitle={dadosIniciais.categorias[0].videos[0].titulo}
-        url={dadosIniciais.categorias[0].videos[0].url}
+        videoTitle={dataInit[0].videos[0].titulo}
+        url={dataInit[0].videos[0].url}
         videoDescription={"O que é Front-end? Trabalhando na área os termos HTML, CSS e JavaScript fazem parte da rotina das desenvolvedoras e desenvolvedores. Mas o que eles fazem, afinal? Descubra com a Vanessa!"}
       />
 
       <Carousel
         ignoreFirstVideo
-        category={dadosIniciais.categorias[0]}
+        category={dataInit[0]}
       />
 
       <Carousel
-        category={dadosIniciais.categorias[1]}
+        category={dataInit[1]}
       />
 
       <Carousel
-        category={dadosIniciais.categorias[2]}
+        category={dataInit[2]}
       />      
 
       <Carousel
-        category={dadosIniciais.categorias[3]}
+        category={dataInit[3]}
       />      
 
       <Carousel
-        category={dadosIniciais.categorias[4]}
+        category={dataInit[4]}
       />      
 
       <Carousel
-        category={dadosIniciais.categorias[5]}
+        category={dataInit[5]}
       />      
-			<Footer/>			
+			<Footer/>		*/}	
     </div>
   );
 }
