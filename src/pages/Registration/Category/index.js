@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
+import Button from '../../../components/Button';
 import Loading from '../../../components/Loading';
 import useForm from '../../../customHooks';
 
@@ -91,9 +92,9 @@ function RegistrationCategory() {
 						/>
 					</label>
 						*/}
-					<button>
+					<Button>
 						Cadastrar
-					</button>
+					</Button>
 					
 				</form>
 
