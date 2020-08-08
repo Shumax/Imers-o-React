@@ -8,13 +8,13 @@ import useForm from '../../../customHooks';
 
 function RegistrationCategory() {
 
-	const initValuesCategory = {
+	const initValues = {
 		titulo: '',
 		description: '',
 		color: ''
 	}
 	
-	const {handleChange, valuesCategory, clearForm} = useForm(initValuesCategory);
+	const {handleChange, values, clearForm} = useForm(initValues);
 	const [categorys, setCategorys] = useState([]);
 
 
@@ -37,21 +37,21 @@ function RegistrationCategory() {
 	return (
 		<div>
 			<PageDefault>
-				<h1>Cadastro de Categoria: { valuesCategory.titulo }</h1>
+				<h1>Cadastro de Categoria: { values.titulo }</h1>
 
 				<form onSubmit={function handleSubmit(event) {
 					event.preventDefault();
 					setCategorys([
 						...categorys,
-						valuesCategory
+						values
 					]);
-					clearForm(initValuesCategory);
+					clearForm(initValues);
 				}}>
 					<FormField
 						label="Nome da Categoria"
 						type="text"
 						name="titulo"
-						value={valuesCategory.titulo}
+						value={values.titulo}
 						onChange={handleChange}
 					/>
 
@@ -59,7 +59,7 @@ function RegistrationCategory() {
 						label="Descrição"
 						type="textarea"
 						name="description"
-						value={valuesCategory.description}
+						value={values.description}
 						onChange={handleChange}
 					/>
 
@@ -67,7 +67,7 @@ function RegistrationCategory() {
 						label="Cor"
 						type="color"
 						name="color"
-						value={valuesCategory.color}
+						value={values.color}
 						onChange={handleChange}
 					/>
 					
@@ -76,7 +76,7 @@ function RegistrationCategory() {
 						Descrição:
 						<textarea 
 							type="text" 
-							value={valuesCategory.description}
+							value={values.description}
 							name="description"
 							onChange={handleChange}
 						/>
@@ -85,7 +85,7 @@ function RegistrationCategory() {
 						Cor:
 						<input 
 							type="color" 
-							value={valuesCategory.color}
+							value={values.color}
 							name="color"
 							onChange={handleChange}
 						/>

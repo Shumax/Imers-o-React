@@ -1,11 +1,12 @@
 import {useState} from 'react';
 
-function useForm(initValuesCategory) {
-	const [valuesCategory, setValuesCategory] = useState(initValuesCategory);
+function useForm(initValues) {
+	const [values, setValues] = useState(initValues);
+	
 
 	function setValue(index, value){
-		setValuesCategory({
-			...valuesCategory,
+		setValues({
+			...values,
 			[index]: value
 		})
 	}
@@ -18,11 +19,11 @@ function useForm(initValuesCategory) {
 	}
 
 	function clearForm() {
-		setValuesCategory(initValuesCategory);
+		setValues(initValues);
 	}
 
 	return {
-		valuesCategory,
+		values,
 		handleChange,
 		clearForm,
 	};

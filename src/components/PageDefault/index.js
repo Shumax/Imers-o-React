@@ -9,7 +9,7 @@ const Main = styled.main`
 	flex: 1;
 	height: 100%;
   padding-top: 50px;
-  
+  min-height: 73vh;
 `;
 
 

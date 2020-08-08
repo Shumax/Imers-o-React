@@ -1,4 +1,4 @@
-import services from '../services';
+import services from '../../services';
 
 const URL_CATEGORYS = `${services.BASE_URL}/categorys`;
 
