@@ -18,7 +18,9 @@ export default function RegistrationVideo() {
 		url: '',
 		category: ''
 	}
-
+	
+	const {handleChange, values, clearForm} = useForm(initValues);
+	
 	useEffect(()=>{
 		categorysRepositories.getAll()
 			.then((response) => {
@@ -26,9 +28,7 @@ export default function RegistrationVideo() {
 			});
 			
 	}, []);
-	
-	const {handleChange, values, clearForm} = useForm(initValues);
-	//console.log(categorys.map(({titulo})=> titulo))
+
 	return (
 		<div>
 			<PageDefault>
@@ -37,17 +37,17 @@ export default function RegistrationVideo() {
 				<form onSubmit={function handleSubmit(event) {
 					event.preventDefault();
 					
-					/*const selectedCategory = categorys.map((categoryFound) => {
-						return categoryFound;
+					const selectedCategory = categorys.find((categoryFound) => {
+						return categoryFound.titulo === values.category;
 					});
 
 					console.log(selectedCategory)
 					console.log(categorys)
-					*/
+					
 					videosRepositories.createVideo({
 						titulo: values.titulo,
 						url: values.url,
-						categoryId: categorys.id,
+						categoryId: selectedCategory.id,
 					}).then(()=>{
 						history.push('/');
 					})
@@ -64,7 +64,7 @@ export default function RegistrationVideo() {
 						label="URL"
 						type="text"
 						name="url"
-						value={values.URL}
+						value={values.url}
 						onChange={handleChange}			
 					/>
 
@@ -77,12 +77,12 @@ export default function RegistrationVideo() {
 						suggestions={categorys.map(({titulo})=> titulo)}
 					/>
 
-					<Button type="submit" >
+					<button type="submit" >
 						Cadastrar
-					</Button>
+					</button>
 				</form>
 				
-				
+				<br></br>
 				<Link to="/registration/category">
 					Cadastrar Categoria
 				</Link>

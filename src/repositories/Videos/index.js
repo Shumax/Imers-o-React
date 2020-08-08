@@ -1,5 +1,4 @@
 import services from '../../services';
-import { func } from 'prop-types';
 
 const URL_VIDEOS = `${services.BASE_URL}/videos`;
 
@@ -9,7 +8,7 @@ function createVideo(videos) {
 		headers: {
 			'Content-type': 'application/json',
 		},
-		bady: JSON.stringify(videos)
+		body: JSON.stringify(videos)
 	})
 	.then(async (response) => {
 		if (response.ok) {
@@ -22,4 +21,4 @@ function createVideo(videos) {
 
 export default {
 	createVideo,
-}
+};
