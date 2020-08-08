@@ -70,16 +70,16 @@ export default function RegistrationVideo() {
 
 					<FormField
 						label="Categoria"
-						type="list"
+						type="category"
 						name="category"
 						value={values.category}
 						onChange={handleChange}
 						suggestions={categorys.map(({titulo})=> titulo)}
 					/>
 
-					<button >
+					<Button type="submit" >
 						Cadastrar
-					</button>
+					</Button>
 				</form>
 				
 				
