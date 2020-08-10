@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Button = styled.button`
-	color: var(--white);
+	background-color: none;
 	border: 1px solid var(--white);
 	box-sizing: border-box;
 	cursor: pointer;
@@ -17,7 +17,7 @@ const Button = styled.button`
 	}
 	&:hover,
 	&:focus {
-	opacity: .5;
+	opacity: .75;
 	}
 `;
 

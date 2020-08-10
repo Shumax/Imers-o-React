@@ -12,11 +12,11 @@ const Container = styled.ul`
     top: 0;
     bottom: 0;
     margin: auto;
-    width: 30px;
-    height: 30px;
+    width: 60px;
+    height: 60px;
     transform: initial;
     &:before {
-      font-size: 30px;
+      font-size: 60px;
     }
   }
   

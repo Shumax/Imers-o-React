@@ -16,7 +16,7 @@ export default function RegistrationVideo() {
 	const initValues = {
 		titulo: '',
 		url: '',
-		category: ''
+		category: '',
 	}
 	
 	const {handleChange, values, clearForm} = useForm(initValues);
@@ -36,18 +36,26 @@ export default function RegistrationVideo() {
 
 				<form onSubmit={function handleSubmit(event) {
 					event.preventDefault();
+					const selectedCategory = "";
+
+					try {
+						selectedCategory = categorys.find((categoryFound) => {
+							return categoryFound.titulo === values.category;
+						});	
+					} catch (error) {
+						throw new Error('Você deve selecionar uma Categoria para cadastrar!');
+					}
 					
-					const selectedCategory = categorys.find((categoryFound) => {
-						return categoryFound.titulo === values.category;
-					});
 
 					console.log(selectedCategory)
 					console.log(categorys)
 					
 					videosRepositories.createVideo({
+
 						titulo: values.titulo,
 						url: values.url,
 						categoryId: selectedCategory.id,
+					
 					}).then(()=>{
 						history.push('/');
 					})
@@ -77,9 +85,9 @@ export default function RegistrationVideo() {
 						suggestions={categorys.map(({titulo})=> titulo)}
 					/>
 
-					<button type="submit" >
+					<Button type="submit" >
 						Cadastrar
-					</button>
+					</Button>
 				</form>
 				
 				<br></br>
