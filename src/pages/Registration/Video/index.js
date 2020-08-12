@@ -6,28 +6,41 @@ import FormField from '../../../components/FormField';
 import Button from '../../../components/Button';
 import Loading from '../../../components/Loading';
 import useForm from '../../../customHooks';
+import validateForm from '../../../customHooks/validateForm';
 import videosRepositories from '../../../repositories/Videos';
 import categorysRepositories from '../../../repositories/Categorys';
 
 export default function RegistrationVideo() {
 	const history = useHistory();
 	const [categorys, setCategorys] = useState([]);
+	const [categorysWithVideos, setCategorysWithVideos] = useState([]);
+	const [hasErrors, setHasErros] = useState({});
+	var selectedCategory = {};
 
 	const initValues = {
 		titulo: '',
 		url: '',
-		category: '',
+		category: ''
 	}
 	
-	const {handleChange, values, clearForm} = useForm(initValues);
+	const {handleChange, values} = useForm(initValues);
 	
 	useEffect(()=>{
 		categorysRepositories.getAll()
 			.then((response) => {
 				setCategorys(response);
 			});
+
+		categorysRepositories.getAllWithVideos()
+			.then((response) => {
+				setCategorysWithVideos(response);
+			});
 			
 	}, []);
+
+	function validate(values){
+		setHasErros(validateForm(values));
+	}
 
 	return (
 		<div>
@@ -36,29 +49,27 @@ export default function RegistrationVideo() {
 
 				<form onSubmit={function handleSubmit(event) {
 					event.preventDefault();
-					const selectedCategory = "";
 
 					try {
 						selectedCategory = categorys.find((categoryFound) => {
 							return categoryFound.titulo === values.category;
+							});	
+	
+						videosRepositories.createVideo({
+							titulo: values.titulo,
+							url: values.url,
+							categoryId: selectedCategory.id,
+						}).then(()=>{
+							history.push('/');	
 						});	
 					} catch (error) {
-						throw new Error('Você deve selecionar uma Categoria para cadastrar!');
+						validate(values);
 					}
-					
 
-					console.log(selectedCategory)
-					console.log(categorys)
 					
-					videosRepositories.createVideo({
-
-						titulo: values.titulo,
-						url: values.url,
-						categoryId: selectedCategory.id,
 					
-					}).then(()=>{
-						history.push('/');
-					})
+					
+					
 				}}>
 
 					<FormField
@@ -84,11 +95,29 @@ export default function RegistrationVideo() {
 						onChange={handleChange}
 						suggestions={categorys.map(({titulo})=> titulo)}
 					/>
+					{hasErrors.category && <h4>{hasErrors.category}</h4>}
 
 					<Button type="submit" >
 						Cadastrar
 					</Button>
 				</form>
+
+				{
+					
+					!categorysWithVideos.length 
+						? <Loading/> 
+						: <div>
+								{categorysWithVideos.map((category, index) => {
+									return (
+										<ul key={`${category}${index}`}>
+											{ category.titulo				
+											}
+											
+										</ul>
+									);
+								})}
+							</div>
+				}
 				
 				<br></br>
 				<Link to="/registration/category">

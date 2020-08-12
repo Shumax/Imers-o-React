@@ -24,8 +24,9 @@ function useForm(initValues) {
 
 	return {
 		values,
+		
 		handleChange,
-		clearForm,
+		clearForm
 	};
 }
 
