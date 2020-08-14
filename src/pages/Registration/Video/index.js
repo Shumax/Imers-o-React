@@ -6,7 +6,7 @@ import FormField from '../../../components/FormField';
 import Button from '../../../components/Button';
 import Loading from '../../../components/Loading';
 import useForm from '../../../customHooks';
-import validateForm from '../../../customHooks/validateForm';
+
 import videosRepositories from '../../../repositories/Videos';
 import categorysRepositories from '../../../repositories/Categorys';
 
@@ -14,7 +14,7 @@ export default function RegistrationVideo() {
 	const history = useHistory();
 	const [categorys, setCategorys] = useState([]);
 	const [categorysWithVideos, setCategorysWithVideos] = useState([]);
-	const [hasErrors, setHasErros] = useState({});
+	
 	var selectedCategory = {};
 
 	const initValues = {
@@ -23,7 +23,7 @@ export default function RegistrationVideo() {
 		category: ''
 	}
 	
-	const {handleChange, values} = useForm(initValues);
+	const {handleChange, values, hasErrors, validate} = useForm(initValues);
 	
 	useEffect(()=>{
 		categorysRepositories.getAll()
@@ -38,9 +38,7 @@ export default function RegistrationVideo() {
 			
 	}, []);
 
-	function validate(values){
-		setHasErros(validateForm(values));
-	}
+	
 
 	return (
 		<div>
@@ -50,7 +48,7 @@ export default function RegistrationVideo() {
 				<form onSubmit={function handleSubmit(event) {
 					event.preventDefault();
 
-					try {
+					if (values.category) {
 						selectedCategory = categorys.find((categoryFound) => {
 							return categoryFound.titulo === values.category;
 							});	
@@ -62,14 +60,10 @@ export default function RegistrationVideo() {
 						}).then(()=>{
 							history.push('/');	
 						});	
-					} catch (error) {
+					} else {
 						validate(values);
 					}
 
-					
-					
-					
-					
 				}}>
 
 					<FormField
@@ -103,7 +97,6 @@ export default function RegistrationVideo() {
 				</form>
 
 				{
-					
 					!categorysWithVideos.length 
 						? <Loading/> 
 						: <div>

@@ -6,6 +6,7 @@ import FormField from '../../../components/FormField';
 import Button from '../../../components/Button';
 import Loading from '../../../components/Loading';
 import useForm from '../../../customHooks';
+import categorysRepositories from '../../../repositories/Categorys';
 
 function RegistrationCategory() {
 
@@ -15,7 +16,7 @@ function RegistrationCategory() {
 		color: ''
 	}
 	
-	const {handleChange, values, clearForm} = useForm(initValues);
+	const {handleChange, values, clearForm, hasErrors, validate} = useForm(initValues);
 	const [categorys, setCategorys] = useState([]);
 
 
@@ -42,11 +43,22 @@ function RegistrationCategory() {
 
 				<form onSubmit={function handleSubmit(event) {
 					event.preventDefault();
-					setCategorys([
-						...categorys,
-						values
-					]);
-					clearForm(initValues);
+					
+					if (!values.titulo) {
+						validate(values);
+					}else {
+						setCategorys([
+							...categorys,	
+							values
+						]);
+
+						categorysRepositories.createCategory({
+							titulo: values.titulo,
+							cor: values.color
+						});
+
+						clearForm(initValues);
+					}
 				}}>
 					<FormField
 						label="Nome da Categoria"
@@ -55,6 +67,7 @@ function RegistrationCategory() {
 						value={values.titulo}
 						onChange={handleChange}
 					/>
+					{hasErrors.titulo && <h4>{hasErrors.titulo}</h4>}
 
 					<FormField
 						label="Descrição"
@@ -72,26 +85,6 @@ function RegistrationCategory() {
 						onChange={handleChange}
 					/>
 					
-					{/*
-					<label>
-						Descrição:
-						<textarea 
-							type="text" 
-							value={values.description}
-							name="description"
-							onChange={handleChange}
-						/>
-					</label>
-					<label>
-						Cor:
-						<input 
-							type="color" 
-							value={values.color}
-							name="color"
-							onChange={handleChange}
-						/>
-					</label>
-						*/}
 					<Button>
 						Cadastrar
 					</Button>

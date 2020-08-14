@@ -5,5 +5,9 @@ export default function validateForm (values) {
 		errors.category = "Você precisa selecionar uma categoria!";
 	}
 
+	if(!values.titulo) {
+		errors.titulo = "Digite um nome para a categoria!";
+	}
+
 	return errors;
 }

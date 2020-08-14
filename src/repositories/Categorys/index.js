@@ -24,7 +24,25 @@ function getAllWithVideos(){
 		})
 }
 
+function createCategory(categorys) {
+	return fetch(`${URL_CATEGORYS}?_embed=category`, {
+		method: 'POST',
+		headers: {
+			'Content-type': 'application/json',
+		},
+		body: JSON.stringify(categorys)
+	})
+	.then(async (response) => {
+		if (response.ok) {
+			return await response.json();	
+		}else{
+			throw new Error('Servidor Offline!!!');
+		}
+	})
+}
+
 export default {
 	getAllWithVideos,
 	getAll,
+	createCategory,
 };
