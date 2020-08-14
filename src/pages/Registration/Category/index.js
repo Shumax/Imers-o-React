@@ -7,6 +7,7 @@ import Button from '../../../components/Button';
 import Loading from '../../../components/Loading';
 import useForm from '../../../customHooks';
 import categorysRepositories from '../../../repositories/Categorys';
+import CategorysTable from './CategorysTable';
 
 function RegistrationCategory() {
 
@@ -94,15 +95,7 @@ function RegistrationCategory() {
 				{
 					!categorys.length 
 						? <Loading/> 
-						: <ul>
-								{categorys.map((category, index) => {
-									return (
-										<li key={`${category}${index}`}>
-											{category.titulo}
-										</li>
-									);
-								})}
-							</ul>
+						: <CategorysTable categorys={categorys} />
 				}
 
 				<Link to="/">

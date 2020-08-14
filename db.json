@@ -28,18 +28,9 @@
       }
     },
     {
-      "id": 4,
       "titulo": "Filmes",
-      "cor": "orange"
-    },
-    {
-      "id": 5,
-      "titulo": "Games",
-      "cor": "red",
-      "link_extra": {
-        "text": "Formação de Jogos na Alura",
-        "url": "https://www.alura.com.br/cursos-online-front-end"
-      }
+      "cor": "",
+      "id": 4
     }
   ],
   "videos": [
