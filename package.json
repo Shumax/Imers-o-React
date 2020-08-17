@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.1.2",
     "concurrently": "^5.2.0",
     "json-server": "^0.16.1",
+    "node-sass": "^4.14.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -17,7 +18,7 @@
     "styled-components": "^5.1.1"
   },
   "scripts": {
-		"dev": "concurrently \"react-scripts start\" \"yarn run server\"",
+    "dev": "concurrently \"react-scripts start\" \"yarn run server\"",
     "server": "node ./server.js",
     "start": "yarn run server",
     "build": "react-scripts build",

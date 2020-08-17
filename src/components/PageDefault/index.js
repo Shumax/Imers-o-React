@@ -8,8 +8,9 @@ const Main = styled.main`
   color: var(--white);
 	flex: 1;
 	height: 100%;
-  padding-top: 50px;
-  min-height: 73vh;
+	padding-top: 50px;
+	bottom: 50px;
+  min-height: 75vh;
 `;
 
 

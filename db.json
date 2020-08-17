@@ -31,6 +31,16 @@
       "titulo": "Filmes",
       "cor": "",
       "id": 4
+    },
+    {
+      "titulo": "Games",
+      "cor": "#fff900",
+      "id": 5
+    },
+    {
+      "titulo": "teste",
+      "cor": "#7900ff",
+      "id": 6
     }
   ],
   "videos": [
