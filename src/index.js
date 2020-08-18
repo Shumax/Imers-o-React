@@ -5,6 +5,8 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './index.css';
 import RegistrationVideo from './pages/Registration/Video';
 import RegistrationCategory from './pages/Registration/Category';
+import EditCategory from './pages/Edition/Category';
+import EditVideo from './pages/Edition/Video';
 import Home from './pages/Home';
 
 
@@ -18,6 +20,8 @@ ReactDOM.render(
 		<Switch>
 			<Route path="/registration/video" component={RegistrationVideo} />
 			<Route path="/registration/category" component={RegistrationCategory} />
+			<Route path="/edit/category/:id" component={EditCategory} />
+			<Route path="/edit/video/:id" component={EditVideo} />
 			<Route path="/" component={Home} exact />
 			<Route component={Pagina404}  />
 		

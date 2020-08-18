@@ -6,7 +6,7 @@ import FormField from '../../../components/FormField';
 import Button from '../../../components/Button';
 import Loading from '../../../components/Loading';
 import useForm from '../../../customHooks';
-import VideosTable from './VideosTable';
+
 import videosRepositories from '../../../repositories/Videos';
 import categorysRepositories from '../../../repositories/Categorys';
 
@@ -96,8 +96,7 @@ export default function RegistrationVideo() {
 					</Button>
 				</form>
 				<br></br>
-				{!videos.length ? <Loading/> : <VideosTable videos={videos} />}
-				
+			
 				<br></br>
 				<Link to="/registration/category">
 					Cadastrar Categoria

@@ -56,9 +56,26 @@ function deleteCategory(id) {
 	})
 }
 
+function getById(id){
+	return fetch(`${URL_CATEGORYS}/${id}`,{
+		method: 'GET',
+		headers: {
+			'Content-type': 'application/json',
+		}
+	})
+		.then(async (response) => {
+			if (response.ok) {
+				return await response.json();	
+			}else{
+				throw new Error('Servidor Offline!!!');
+			}
+		})
+}
+
 export default {
 	getAllWithVideos,
 	getAll,
 	createCategory,
 	deleteCategory,
+	getById,
 };

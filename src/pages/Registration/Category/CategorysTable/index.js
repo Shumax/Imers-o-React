@@ -1,13 +1,14 @@
 import React from 'react';
-import {useHistory} from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import categoryRepositories from '../../../../repositories/Categorys';
-import useForm from '../../../../customHooks';
 
 import Button from '../../../../components/Button';
 import './categoryTable.scss';
 
 const CategorysTable = (props) => {
 	const history = useHistory();
+
+	
 
 	console.log(props)
 	return (
@@ -19,8 +20,10 @@ const CategorysTable = (props) => {
 					<th>{category.titulo}</th>
 					<th>
 						<Button
-								
-						>Alterar</Button>
+							as={Link}
+							to={`/edit/category/${category.id}`}
+						>
+							Alterar</Button>
 					</th>
 					<th>
 					<Button

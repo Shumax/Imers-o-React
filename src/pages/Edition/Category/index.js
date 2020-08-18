@@ -1,45 +1,36 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
+import { Link , useParams} from "react-router-dom";
 
 import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
 import Button from '../../../components/Button';
-import Loading from '../../../components/Loading';
+//import Loading from '../../../components/Loading';
 import useForm from '../../../customHooks';
 import categorysRepositories from '../../../repositories/Categorys';
-import CategorysTable from './CategorysTable';
 
-function RegistrationCategory() {
 
-	var initValues = {
-		titulo: '',
-		description: '',
-		color: ''
-	}
+function EditCategory() {
+	const parseid = useParams();
+	const id = parseInt(parseid.id)
 	
-	const {handleChange, values, clearForm, hasErrors, validate} = useForm(initValues);
-	const [categorys, setCategorys] = useState([]);
+
+	const [categoryById, setCategoryById] = useState([]);
+	const {handleChange, values, clearForm, hasErrors, validate} = useForm(categoryById);
+	
 
 	
 	useEffect(() => {
-		const BASE_URL = window.location.hostname.includes('localhost')
-			? 'http://localhost:8080/categorys'
-			: 'https://devsflix-by-shumax.herokuapp.com/categorys';
-
-		fetch(BASE_URL)
-			.then(async (response) => {
-				const responseFetched = await response.json();
-				setCategorys([
-					...responseFetched,
-				]);
-		});
-		
+		categorysRepositories.getById(id)
+			.then((resp) => {
+				setCategoryById(resp);
+			});
 	},[]);
 
+	console.log(values)
 	return (
 		<div>
 			<PageDefault>
-				<h1>Cadastro de Categoria: { values.titulo }</h1>
+				<h1>Edição da Categoria { categoryById.titulo }</h1>
 
 				<form onSubmit={function handleSubmit(event) {
 					event.preventDefault();
@@ -47,17 +38,11 @@ function RegistrationCategory() {
 					if (!values.titulo) {
 						validate(values);
 					}else {
-						setCategorys([
-							...categorys,	
+						setCategoryById([
+							...categoryById,	
 							values
 						]);
 
-						categorysRepositories.createCategory({
-							titulo: values.titulo,
-							cor: values.color
-						});
-
-						clearForm(initValues);
 					}
 				}}>
 					<FormField
@@ -91,11 +76,7 @@ function RegistrationCategory() {
 					
 				</form>
 				<br></br>
-				{
-					!categorys.length 
-						? <Loading/> 
-						: <CategorysTable categorys={categorys} />
-				}
+				
 
 				<Link to="/">
 					Voltar para Home
@@ -105,4 +86,4 @@ function RegistrationCategory() {
 	);
 }
 
-export default RegistrationCategory;
+export default EditCategory;
